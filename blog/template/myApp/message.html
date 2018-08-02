@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<style>
+ *{margin:0px;padding:0px;}
+body{background-color:#f9f9f9;}
+
+.clears{ clear:both;}
+/*messages*/
+.messages{padding:15px 0;}
+.messages input,.messages select,.messages textarea{margin:0;padding:0; background:none; border:0; font-family:"Microsoft Yahei";}
+.messlist {height:30px;margin-bottom:10px;}
+.messlist label{float:left;width:100px; height:30px; font-size:14px; line-height:30px; text-align:right;padding-right:10px;}
+.messlist input{float:left;width:300px;height:28px;padding-left:5px;border:#ccc 1px solid;}
+.messlist.textareas{ height:auto;}
+.messlist textarea{float:left;width:400px; height:110px;padding:5px;border:#ccc 1px solid;}
+.messlist.yzms input{width:100px;}
+.messlist.yzms .yzmimg{ float:left;margin-left:10px;}
+.messsub{padding:0px 0 0 110px;}
+.messsub input{float: left;width:100px; height:35px; background:#ddd; font-size:14px; font-weight:bold; cursor:pointer;margin-right:5px}
+.messsub input:hover{ background:#f60;color:#fff;}
+#label0{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label1{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label2{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label3{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label4{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label5{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label6{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label7{display:none;color:#0aa770;height:28px;line-height:28px;}
+#label8{display:none;color:#0aa770;height:48px;line-height:48px;}
+#label9{display:none;color:#0aa770;height:48px;line-height:48px;}
+#label10{display:none;color:#0aa770;height:48px;line-height:48px;}
+</style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>孙跃博客</title>
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <style type="text/css">.archive-top .section-overlay-layer {
+        background: rgba(13, 60, 85, 0.6);
+    }</style>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-migrate.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body class="home blog">
+<header id="masthead" class="header header-style-one site-header">
+    <!-- COLOR OVER IMAGE -->
+    <div class="overlay-layer-nav sticky-navigation-open" style="min-height: 75px;">
+        <!-- STICKY NAVIGATION -->
+        <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation appear-on-scroll"
+             style="top: 0px;">
+            <!-- CONTAINER -->
+            <div class="container">
+                <div class="navbar-header" style="height: 100%">
+                    <!-- LOGO -->
+                    <button title="切换菜单" type="button" class="navbar-toggle menu-toggle" id="menu-toggle"
+                            data-toggle="collapse" data-target="#menu-primary">
+                        <span class="screen-reader-text">切换导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="header-logo-wrap text-header">
+                        <h1 itemprop="headline" id="site-title" class="site-title">
+                            <a href="/index/" title="孙跃博客" rel="home">孙跃博客</a>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- MENU -->
+                <div  id="menu-primary"class="navbar-collapse collapse">
+                    <!-- LOGO ON STICKY NAV BAR -->
+                    <div id="site-header-menu" class="site-header-menu">
+                        <nav id="site-navigation" class="main-navigation" role="navigation">
+                            <ul class="nav navbar-nav navbar-right main-navigation small-text no-menu">
+                                <li class="page_item page-item-2">
+                                    <a href="/index/">首页</a>
+                                </li>
+                                <li class="page_item page-item-2">
+                                    <a href="">亲人朋友</a>
+                                </li>
+                                <li class="page_item page-item-2">
+                                    <a href="/message/">留言板</a>
+                                </li>
+                                <li class="page_item page-item-2">
+                                    <a href="/me/">关于我</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /END CONTAINER -->
+        </div>
+        <!-- /END STICKY NAVIGATION -->
+
+    </div>
+    <!-- /END COLOR OVER IMAGE -->
+</header>
+<!--<div style="float: left;">aqweqweqwe</div>-->
+<div class="mail">
+    <div class="send">
+        <div class="sendbox">
+            <form action="/tomessage/" method="post" class="messages" id="info">
+                {% csrf_token %}
+                <div class="messlist">
+                    <label>姓名</label>
+                    <input type="text" placeholder="姓名" id="input1" name="commenter">
+
+                </div>
+
+
+                <div class="messlist">
+                    <label>电子邮件</label>
+                    <input type="email" placeholder="电子邮件" id="input2"  name="emil">
+                </div>
+
+
+                <div class="messlist">
+                    <label>手机号</label>
+                    <input type="phone" placeholder="手机号" id="input3"  name="phone">
+                </div>
+                <div class="messlist textareas">
+                    <label>留言内容</label>
+                    <textarea placeholder="说点什么吧..." id="input4" onblur="content()" name="content"></textarea>
+                </div>
+
+                <div class="messsub">
+                    <input type="button" value="提交" onclick="yz()"style="background:#00a3eb;color:#fff;" />
+                    <input type="reset" value="重填" />
+                </div>
+            </form>
+     <script>
+      function yz(){
+        var m=document.getElementsByTagName("input");
+        for(var i=0;i<m.length;i++)
+        {
+          if(m[i].value==""||m[i].value==null||m[i].value==" ")
+          {
+            alert("请填写所有的输入,不能为空格！");
+            return false;
+          }
+        }
+        alert("提交成功！你的留言我会留意的哟");
+        var infoForm = document.getElementById("info");
+        infoForm.submit();
+      }
+    </script>
+        </div>
+    </div>
+</div>
+<footer  id="footer"  class="footer grey-bg" style="margin-top: 300px">
+    <div class="container">
+        <div class="powered-by">
+            Copyright© 2018 <a href="" ></a> 孙跃 版权所有
+
+        </div>
+    </div><!-- container -->
+</footer>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

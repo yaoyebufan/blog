@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://wordpress.ishilf.com/ -->
+<html lang="zh-CN" class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>孙跃博客</title>
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <style type="text/css">.archive-top .section-overlay-layer {
+        background: rgba(13, 60, 85, 0.6);
+    }</style>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-migrate.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/static/js/js/html5shiv.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="home blog">
+<!-- =========================
+	SECTION: HOME / HEADER
+============================== -->
+<!--header-->
+<header id="masthead" class="header header-style-one site-header">
+    <!-- COLOR OVER IMAGE -->
+    <div class="overlay-layer-nav sticky-navigation-open" style="min-height: 75px;">
+        <!-- STICKY NAVIGATION -->
+        <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation appear-on-scroll"
+             style="top: 0px;">
+            <!-- CONTAINER -->
+            <div class="container">
+                <div class="navbar-header" style="height: 100%">
+                    <!-- LOGO -->
+                    <button title="切换菜单" type="button" class="navbar-toggle menu-toggle" id="menu-toggle"
+                            data-toggle="collapse" data-target="#menu-primary">
+                        <span class="screen-reader-text">切换导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="header-logo-wrap text-header">
+                        <h1 itemprop="headline" id="site-title" class="site-title">
+                            <a href="/index/" title="孙跃博客" rel="home">孙跃博客</a>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- MENU -->
+                <div  id="menu-primary"class="navbar-collapse collapse">
+                    <!-- LOGO ON STICKY NAV BAR -->
+                    <div id="site-header-menu" class="site-header-menu">
+                        <nav id="site-navigation" class="main-navigation" role="navigation">
+                            <ul class="nav navbar-nav navbar-right main-navigation small-text no-menu">
+                                <li class="page_item page-item-2">
+                                    <a href="/index/">首页</a>
+                                </li>
+                                <li class="page_item page-item-2">
+                                    <a href="">亲人朋友</a>
+                                </li>
+                                <li class="page_item page-item-2">
+                                    <a href="/message/">留言板</a>
+                                </li>
+                                <li class="page_item page-item-2">
+                                    <a href="/me/">关于我</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /END CONTAINER -->
+        </div>
+        <!-- /END STICKY NAVIGATION -->
+
+    </div>
+    <!-- /END COLOR OVER IMAGE -->
+</header>
+<!-- /END HOME / HEADER  -->
+
+<div role="main" id="content" class="content-wrap" style="min-height: 1px;">
+    <div class="container">
+        <div id="primary" class="content-area col-md-8">
+            {%for article in articlelist%}
+            <main  id="main" class="site-main" role="main">
+                <article id="post-7" class="content-single-page post-7 post type-post status-publish format-standard hentry category-uncategorized">
+                    <header class="entry-header single-header">
+                        <h1  class="entry-title single-title">{{article.title}}</h1>
+                        <div class="colored-line-left"></div>
+                        <div class="clearfix"></div>
+                        <div class="entry-meta single-entry-meta">
+                        <span class="author-link" itemprop="author" itemscope="" itemtype="">
+                            <span itemprop="name" class="post-author author vcard">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                {{article.author}}
+                            </span>
+                        </span>
+                            <time class="post-time posted-on published" datetime="2017-08-01T16:54:35+00:00">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                {{article.date|date:"Y-m-d H:i:s"}}
+                            </time>
+                            <a href="/tocomment/{{article.pk}}/" class="post-comments">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                查看评论
+                            </a>
+                        </div><!-- .entry-meta -->
+                    </header><!-- .entry-header -->
+
+                    <div itemprop="text" class="entry-content">
+                        {{article.content}}
+                    </div><!-- .entry-content -->
+
+                    <footer class="entry-footer">
+                    </footer><!-- .entry-footer -->
+                </article><!-- #post-## -->
+                <div id="comments" class="comments-area">
+                    <div id="respond" class="comment-respond">
+                        <h3 id="reply-title" class="comment-reply-title">
+                        </h3>
+                        <form action="/tocomment/" method="post" id="commentform"class="comment-form" >
+                            {% csrf_token %}
+                            <p class="comment-notes">
+                            <p class="comment-form-comment">
+                                <label for="comment">评论</label>
+                                <textarea id="comment" name="comment"  cols="45" rows="8" maxlength="65525"
+                                          aria-required="true" required="required"></textarea>
+                            </p>
+                            <p class="comment-form-author">
+                                <label for="author">
+                                    姓名
+                                    <span class="required">*</span>
+                                </label>
+                                <input id="author" name="author" type="text"value="" size="30" maxlength="245" required="required">
+                            </p>
+                            <p class="comment-form-email">
+                                <label for="email">
+                                    电子邮件
+                                    <span class="required">*</span>
+                                </label>
+                                <input id="email" name="email" type="email" value="" size="30" maxlength="100"  required="required">
+                            </p>
+                            <input type="hidden" name="id" value="{{article.pk}}"/>
+                            <p class="form-submit">
+                                <input name="submit" type="submit" id="submit" class="submit" value="发表评论">
+                            </p>
+                        </form>
+                    </div><!-- #respond -->
+
+                </div><!-- #comments -->
+
+            </main><!-- #main -->
+            {%endfor%}
+        </div><!-- #primary -->
+
+
+    </div>
+</div><!-- .content-wrap -->
+
+<footer  id="footer"  class="footer grey-bg">
+    <div class="container">
+        <div class="powered-by">
+            Copyright© 2018 <a href="" ></a> 孙跃 版权所有
+
+        </div>
+    </div><!-- container -->
+</footer>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>
