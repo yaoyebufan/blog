@@ -74,18 +74,19 @@
     <!-- /END COLOR OVER IMAGE -->
 </header>
 <div style="margin-top: 50px;margin-left: 50px;margin-bottom: 50px;margin-right: 50px">
-<ul style="list-style: none">
+<ul style="list-style: none;">
     <hr>
-    {%for comment in comments%}
-    <li>时间：{{comment.date}}</li>
-    <li>@{{comment.commenter}}：{{comment.content}}</li>
+    {%for m in message%}
+    <li>@{{m.commenter}}  在时间：{{m.date}}  说：</li>
+    <br>
+    <li>{{m.content}}</li>
     <hr>
     {% empty%}
-    <li>当前没人评论</li>
+    <li>meiyou</li>
     {% endfor %}
 </ul>
 </div>
-<footer  id="footer"  class="footer grey-bg">
+<footer  id="footer"  class="footer grey-bg" style="margin-top: 300px">
     <div class="container">
         <div class="powered-by">
             Copyright© 2018 <a href="" ></a> 孙跃 版权所有

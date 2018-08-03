@@ -1,5 +1,5 @@
 from django.db import models
-
+from tinymce.models import HTMLField
 # Create your models here.
 # 文章
 class Article(models.Model):
@@ -9,8 +9,10 @@ class Article(models.Model):
     title = models.CharField(max_length=100,null=True)
     # 文章发表时间
     date = models.DateTimeField(null=True)
+    # 文章标签
+    tag = models.CharField(max_length=50,null=True)
     # 文章内容
-    content = models.TextField(null=True)
+    content = HTMLField(null=True)
     # 附带图片
     picture = models.ImageField(null=True,upload_to='static/picture',blank=True)
     # 是否为假删除
@@ -30,6 +32,7 @@ class Article(models.Model):
 # 留言
 import time
 class Message(models.Model):
+    message = models.Manager()
     @classmethod
     def createmessage(cls, commenter1, phone1, emil1, contend1, date1, isD=False):
         message = cls(commenter=commenter1, phone=phone1, emil=emil1, content=contend1, date=date1,isDelete=isD)
@@ -68,4 +71,16 @@ class comment(models.Model):
     uid = models.ForeignKey(Article, on_delete=models.CASCADE,null=True, blank=True)
     class Meta:
         db_table = 'comment'  # 设置表名，默认小写
+        ordering = ['-id']
+
+class Log(models.Model):
+    log = models.Manager()
+    # 评论者
+    commenter = models.CharField(max_length=20, null=True)
+    # 日志内容
+    content = models.TextField(null=True)
+    # 时间
+    date = models.DateTimeField(null=True)
+    class Meta:
+        db_table = 'log'  # 设置表名，默认小写
         ordering = ['-id']

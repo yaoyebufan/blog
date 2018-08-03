@@ -43,7 +43,7 @@
                     </button>
                     <div class="header-logo-wrap text-header">
                         <h1 itemprop="headline" id="site-title" class="site-title">
-                            <a href="/index/" title="孙跃博客" rel="home">孙跃博客</a>
+                            <a href="/index/" title="孙跃博客" rel="home" style="text-decoration:none">孙跃博客</a>
                         </h1>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                     <a href="/index/">首页</a>
                                 </li>
                                 <li class="page_item page-item-2">
-                                    <a href="">亲人朋友</a>
+                                   <a href="/time/">时间轴</a>
                                 </li>
                                 <li class="page_item page-item-2">
                                     <a href="/message/">留言板</a>
@@ -87,6 +87,7 @@
         <div id="primary" class="content-area col-md-8">
             {%for article in articlelist%}
             <main  id="main" class="site-main" role="main">
+
                 <article id="post-7" class="content-single-page post-7 post type-post status-publish format-standard hentry category-uncategorized">
                     <header class="entry-header single-header">
                         <h1  class="entry-title single-title">{{article.title}}</h1>
@@ -99,11 +100,15 @@
                                 {{article.author}}
                             </span>
                         </span>
+                            <span class="posted-in entry-terms-categories" >
+					            <i class="fa fa-folder" aria-hidden="true"></i>
+					                标签：{{article.tag}}
+                            </span>
                             <time class="post-time posted-on published" datetime="2017-08-01T16:54:35+00:00">
                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
                                 {{article.date|date:"Y-m-d H:i:s"}}
                             </time>
-                            <a href="/tocomment/{{article.pk}}/" class="post-comments">
+                            <a href="/tocomment/{{article.pk}}/" class="post-comments" style="text-decoration:none">
                                 <i class="fa fa-comment" aria-hidden="true"></i>
                                 查看评论
                             </a>
@@ -111,9 +116,24 @@
                     </header><!-- .entry-header -->
 
                     <div itemprop="text" class="entry-content">
+                        {% autoescape off %}
                         {{article.content}}
+                        {% endautoescape %}
                     </div><!-- .entry-content -->
-
+                    {% if article.picture != "" %}
+                    <div class="post-img-wrap">
+                        <a href="/tocontent/{{article.pk}}" title="{{article.title}}">
+                            <picture itemscope="" itemprop="image">
+                                <source media="(max-width: 600px)"srcset="/{{article.picture}}">
+                                <img src="/{{article.picture}}" width="750px" height="160px">
+                            </picture>
+                        </a>
+                        <div class="post-date">
+                            <span class="post-date-day">{{article.date|date:"d"}}</span>
+                            <span class="post-date-month">{{article.date|date:"F"}}</span>
+                        </div>
+                    </div>
+                    {% endif%}
                     <footer class="entry-footer">
                     </footer><!-- .entry-footer -->
                 </article><!-- #post-## -->

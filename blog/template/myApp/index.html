@@ -42,7 +42,7 @@
                     </button>
                     <div class="header-logo-wrap text-header">
                         <h1 itemprop="headline" id="site-title" class="site-title">
-                            <a href="/index/" title="孙跃博客" rel="home">孙跃博客</a>
+                            <a href="/index/" title="孙跃博客" rel="home" style="text-decoration:none">孙跃博客</a>
                         </h1>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                                     <a href="/index/">首页</a>
                                 </li>
                                 <li class="page_item page-item-2">
-                                    <a href="">亲人朋友</a>
+                                    <a href="/time/">时间轴</a>
                                 </li>
                                 <li class="page_item page-item-2">
                                     <a href="/message/">留言板</a>
@@ -82,7 +82,7 @@
 <!-- /END HOME / HEADER  -->
 
 <div class="archive-top"
-     style="background-image: url(http://wordpress.ishilf.com/wp-content/themes/llorix-one-lite/images/background-images/background-blog.jpg);">
+     style="background-image: url(https://i.loli.net/2017/11/09/5a046546a2a1f.jpg);">
     <div class="section-overlay-layer">
         <div class="container">
             <p class="archive-top-big-title">我即是凡人</p>
@@ -100,6 +100,7 @@
             <main id="main" class="site-main">
                 <article itemprop="blogPosts" class="border-bottom-hover post-7 post type-post status-publish format-standard hentry category-uncategorized" title="{{article.title}}">
                     <header class="entry-header">
+                        {% if article.picture != "" %}
                         <div class="post-img-wrap">
                             <a href="/tocontent/{{article.pk}}" title="{{article.title}}">
                                 <picture itemscope="" itemprop="image">
@@ -112,21 +113,25 @@
                                 <span class="post-date-month">{{article.date|date:"F"}}</span>
                             </div>
                         </div>
+                        {% endif%}
                         <div class="entry-meta list-post-entry-meta">
-                            <span  class="entry-author post-author">
-                                <span  class="entry-author author vcard">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <a class="url fn n" href="" rel="author">{{article.author}} </a>
-                                </span>
-				            </span>
-                            <!--<span class="posted-in entry-terms-categories" >-->
-                            <!--<i class="fa fa-folder" aria-hidden="true"></i>-->
-                            <!--分类<a href="" >日常</a>-->
-                            <!--</span>-->
-                            <!--   <a href="" class="post-comments">
-                                  <i class="fa fa-comment" aria-hidden="true"></i>
-                                  100
-                              </a> -->
+                            <span class="author-link" itemprop="author" itemscope="" itemtype="">
+                            <span itemprop="name" class="post-author author vcard">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                {{article.author}}
+                            </span>
+                        </span>
+                             <span class="posted-in entry-terms-categories" >
+					            <i class="fa fa-folder" aria-hidden="true"></i>
+					                标签：{{article.tag}}
+                            </span>
+                            <span class="posted-in entry-terms-categories" >
+                                    时间：{{article.date}}
+                            </span>
+                               <a href="/tocomment/{{article.pk}}/" class="post-comments" style="text-decoration:none">
+                                  <i class="fa fa-comment" aria-hidden="true" ></i>
+                                  评论
+                              </a>
                         </div><!-- .entry-meta -->
                         <h1 class="entry-title" itemprop="headline">
                             <a href="/tocontent/{{article.pk}}" >{{article.title}}</a>
@@ -134,39 +139,41 @@
                         <div class="colored-line-left"></div>
                         <div class="clearfix"></div>
                     </header><!-- .entry-header -->
+                        {% autoescape off %}
                     <div  class="entry-content entry-summary">
-                        <p style="display:block;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;">
-                            {{article.content}}
-                        </p>
+                        <!--<p style="display:block;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;">-->
+                        {{article.content|truncatewords_html:"3"}}
+                        <!--</p>-->
                     </div><!-- .entry-content -->
+                    {% endautoescape %}
                 </article><!-- #post-## -->
             </main><!-- #main -->
             {%endfor%}
-            <ul>
-                <a href="/index/?page=1">首页</a>
+            <ul style="font-size: 20px;font-family: 新宋体;">
+                <a href="/index/?page=1" style="text-decoration:none;">首页</a>
                 {% if articlelist.has_previous %}
-                <a href="/index/?page={{ articlelist.previous_page_number }}">上一页</a>
+                <a href="/index/?page={{ articlelist.previous_page_number }}" style="text-decoration:none">上一页</a>
                 {% endif %}
                 {% for index in articlelist.paginator.page_range %}
                 {% if index == articlelist.number %}
                 {{index}}
                 {% else %}
-                <a href="/index/?page={{index}}">{{index}}</a>
+                <a href="/index/?page={{index}}" style="text-decoration:none">{{index}}</a>
                 {% endif%}
                 {% endfor %}
                 {% if articlelist.has_next %}
-                <a href="/index/?page={{ articlelist.next_page_number }}">下一页</a>
+                <a href="/index/?page={{ articlelist.next_page_number }}" style="text-decoration:none">下一页</a>
                 {% endif %}
-                <a href="/index/?page={{ articlelist.paginator.num_pages }}">尾页</a>
+                <a href="/index/?page={{ articlelist.paginator.num_pages }}" style="text-decoration:none">尾页</a>
             </ul>
         </div><!-- #primary -->
 
 
         <!-- 右边 -->
-
         <div id="sidebar-secondary" class="col-md-4 widget-area">
             <aside id="search-2" class="widget widget_search">
-                <form role="search" method="get" class="search-form" action="">
+                <form role="search" method="post" class="search-form" action="/so/">
+                    {% csrf_token %}
                     <label>
                         <span class="screen-reader-text">搜索：</span>
                         <input type="search" class="search-field" placeholder="搜索…" value="" name="s">
@@ -178,25 +185,40 @@
             <aside id="recent-posts-2" class="widget widget_recent_entries"><h2 class="widget-title">最新文章</h2>
                 <div class="colored-line-left"></div>
                 <div class="clearfix widget-title-margin"></div>
-                <!--{%for article in articlelist%}-->
+                {% for list in somelist %}
                 <ul>
                     <li>
-                        <a href="/tocontent/{{article.pk}}">{{article.title}}</a>
+                        <a href="/tocontent/{{list.pk}}">{{list.title}}</a>
                     </li>
                 </ul>
-                <!--{%endfor%}-->
+                {% empty %}
+                <ul>
+                    <li>meiyou</li>
+                </ul>
+                {%endfor%}
+          <a href="/morearticle/" style="text-decoration:none">查看更多>></a>
+
             </aside>
 
-            <!-- <aside id="recent-comments-2" class="widget widget_recent_comments"><h2 class="widget-title">最新评论</h2>
+             <aside id="recent-comments-2" class="widget widget_recent_comments"><h2 class="widget-title">最新留言</h2>
                 <div class="colored-line-left"></div>
                 <div class="clearfix widget-title-margin"></div>
+                 {% for list in messagelist %}
                 <ul id="recentcomments">
                     <li class="recentcomments">
-                        <span class="comment-author-link">超人</span>
-                        发表在《<a href="">phpStudy的Apache配置虚拟主机</a>》
+                        <span class="comment-author-link"></span>
+                         <p style="display:block;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;">
+                            <a href="/tomessage/{{list.pk}}">@{{list.commenter}} 在{{list.date}} 说:{{list.content}}</a>
+                        </p>
                     </li>
                 </ul>
-            </aside> -->
+                 {% empty %}
+                <ul>
+                    <li>meiyou</li>
+                </ul>
+                {%endfor%}
+                 <a href="/moremessage/" style="text-decoration:none">查看更多>></a>
+            </aside>
             <aside id="categories-2" class="widget widget_categories"><h2 class="widget-title">小游戏</h2>
                 <div class="colored-line-left"></div>
                 <div class="clearfix widget-title-margin"></div>
@@ -209,7 +231,7 @@
             <aside  class="widget widget_categories"><h2 class="widget-title">我喜欢的音乐</h2>
                 <div class="colored-line-left"></div>
                 <div class="clearfix widget-title-margin"></div>
-   <iframe frameborder="no"  border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2117321&auto=1&height=66"></iframe>
+                <iframe frameborder="no"  border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2117321&auto=1&height=66"></iframe>
             </aside>
         </div><!-- #sidebar-secondary -->
 

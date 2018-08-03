@@ -51,7 +51,7 @@
                                     <a href="/index/">首页</a>
                                 </li>
                                 <li class="page_item page-item-2">
-                                  <a href="/time/">时间轴</a>
+                                   <a href="/time/">时间轴</a>
                                 </li>
                                 <li class="page_item page-item-2">
                                     <a href="/message/">留言板</a>
@@ -74,18 +74,35 @@
     <!-- /END COLOR OVER IMAGE -->
 </header>
 <div style="margin-top: 50px;margin-left: 50px;margin-bottom: 50px;margin-right: 50px">
-<ul style="list-style: none">
+<ul style="list-style: none;font-size: large;font-family: 新宋体">
     <hr>
-    {%for comment in comments%}
-    <li>时间：{{comment.date}}</li>
-    <li>@{{comment.commenter}}：{{comment.content}}</li>
+    {%for m in articlelist%}
+    <a href="/tocontent/{{m.pk}}" style="text-decoration:none">标题：{{m.title}} --- {{m.author}} --- {{m.date}}</a>
+    <br>
     <hr>
     {% empty%}
-    <li>当前没人评论</li>
+    <li>对不起！没有该文章</li>
     {% endfor %}
 </ul>
+      <ul style="font-size: 20px;font-family: 新宋体;">
+                <a href="/morearticle/?page=1" style="text-decoration:none">首页</a>
+                {% if articlelist.has_previous %}
+                <a href="/morearticle/?page={{ articlelist.previous_page_number }}" style="text-decoration:none">上一页</a>
+                {% endif %}
+                {% for index in articlelist.paginator.page_range %}
+                {% if index == articlelist.number %}
+                {{index}}
+                {% else %}
+                <a href="/morearticle/?page={{index}}" style="text-decoration:none">{{index}}</a>
+                {% endif%}
+                {% endfor %}
+                {% if articlelist.has_next %}
+                <a href="/morearticle/?page={{ articlelist.next_page_number }}" style="text-decoration:none">下一页</a>
+                {% endif %}
+                <a href="/morearticle/?page={{ articlelist.paginator.num_pages }}" style="text-decoration:none">尾页</a>
+            </ul>
 </div>
-<footer  id="footer"  class="footer grey-bg">
+<footer  id="footer"  class="footer grey-bg" >
     <div class="container">
         <div class="powered-by">
             Copyright© 2018 <a href="" ></a> 孙跃 版权所有

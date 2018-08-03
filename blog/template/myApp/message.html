@@ -66,7 +66,7 @@ body{background-color:#f9f9f9;}
                     </button>
                     <div class="header-logo-wrap text-header">
                         <h1 itemprop="headline" id="site-title" class="site-title">
-                            <a href="/index/" title="孙跃博客" rel="home">孙跃博客</a>
+                            <a href="/index/" title="孙跃博客" rel="home" style="text-decoration:none">孙跃博客</a>
                         </h1>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ body{background-color:#f9f9f9;}
                                     <a href="/index/">首页</a>
                                 </li>
                                 <li class="page_item page-item-2">
-                                    <a href="">亲人朋友</a>
+                                    <a href="/time/">时间轴</a>
                                 </li>
                                 <li class="page_item page-item-2">
                                     <a href="/message/">留言板</a>
@@ -112,15 +112,11 @@ body{background-color:#f9f9f9;}
                 <div class="messlist">
                     <label>姓名</label>
                     <input type="text" placeholder="姓名" id="input1" name="commenter">
-
                 </div>
-
-
                 <div class="messlist">
                     <label>电子邮件</label>
                     <input type="email" placeholder="电子邮件" id="input2"  name="emil">
                 </div>
-
 
                 <div class="messlist">
                     <label>手机号</label>
@@ -130,12 +126,14 @@ body{background-color:#f9f9f9;}
                     <label>留言内容</label>
                     <textarea placeholder="说点什么吧..." id="input4" onblur="content()" name="content"></textarea>
                 </div>
-
                 <div class="messsub">
                     <input type="button" value="提交" onclick="yz()"style="background:#00a3eb;color:#fff;" />
                     <input type="reset" value="重填" />
                 </div>
             </form>
+            </div>
+    </div>
+    </div>
      <script>
       function yz(){
         var m=document.getElementsByTagName("input");
@@ -152,9 +150,6 @@ body{background-color:#f9f9f9;}
         infoForm.submit();
       }
     </script>
-        </div>
-    </div>
-</div>
 <footer  id="footer"  class="footer grey-bg" style="margin-top: 300px">
     <div class="container">
         <div class="powered-by">

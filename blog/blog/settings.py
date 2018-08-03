@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myApp',
+#     富文件
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +87,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -126,3 +127,9 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# 富文本
+TINYMCE_DEFAULT_CONFIG = {
+    'theme':'advanced',
+    'width':600,
+    'height':400,
+}
